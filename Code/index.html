@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <title>RSA Шифрование/Расшифрование</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>RSA Алгоритм</h1>
+
+    <div class="tabs">
+        <button id="encrypt-tab-button" class="tab-button active">Шифрование</button>
+        <button id="decrypt-tab-button" class="tab-button">Расшифрование</button>
+    </div>
+
+    <!-- Вкладка Шифрование -->
+    <div id="encrypt-tab" class="tab-content" style="display: block;">
+        <h2>Шифрование файла</h2>
+        <p>Введите простые числа p, q и секретный ключ Kc для вычисления открытого ключа KO (e, r) и шифрования файла.</p>
+
+        <div class="form-group">
+            <label for="p">Простое число p:</label>
+            <input type="text" id="p" name="p" required>
+        </div>
+        <div class="form-group">
+            <label for="q">Простое число q:</label>
+            <input type="text" id="q" name="q" required>
+        </div>
+        <div class="form-group">
+            <label for="d">Секретный ключ Kc:</label>
+            <input type="text" id="d" name="d" required>
+        </div>
+
+        <div class="form-group">
+            <label for="encrypt-file">Файл для шифрования:</label>
+            <button id="select-encrypt-file">Выбрать файл</button>
+            <span id="encrypt-file-path">Файл не выбран</span>
+        </div>
+
+        <button id="encrypt-button">Вычислить KO и зашифровать</button>
+
+        <div class="result-section">
+            <h3>Результаты шифрования:</h3>
+            <div class="form-group">
+                <label>Вычисленный открытый ключ KO (e, r):</label>
+                <textarea id="public-key-output" rows="2" readonly></textarea>
+            </div>
+            <div class="form-group">
+                <label>Исходные байты файла:</label>
+                <textarea id="original-bytes-encrypt-output" rows="5" readonly></textarea>
+            </div>
+            <div class="form-group">
+                <label>Зашифрованные данные:</label>
+                <textarea id="encrypted-output" rows="10" readonly></textarea>
+           
+                <button id="save-encrypted-button" style="margin-top: 10px;" disabled>Сохранить в файл...</button>
+             
+            </div>
+        </div>
+    </div>
+
+    <!-- Вкладка Расшифрование -->
+    <div id="decrypt-tab" class="tab-content">
+        <h2>Расшифрование файла</h2>
+        <p>Введите модуль r, секретный ключ Kc и выберите файл с зашифрованными данными (числами, разделенными пробелами).</p>
+
+        <div class="form-group">
+            <label for="r-decrypt">Модуль r:</label>
+            <input type="text" id="r-decrypt" name="r-decrypt" required>
+        </div>
+        <div class="form-group">
+            <label for="d-decrypt">Секретный ключ Kc:</label>
+            <input type="text" id="d-decrypt" name="d-decrypt" required>
+        </div>
+
+         <div class="form-group">
+            <label for="decrypt-file">Файл для расшифрования:</label>
+            <button id="select-decrypt-file">Выбрать файл</button>
+            <span id="decrypt-file-path">Файл не выбран</span>
+        </div>
+
+        <button id="decrypt-button">Расшифровать</button>
+
+        <div class="result-section">
+            <h3>Результат расшифрования:</h3>
+            <div class="form-group">
+                <label>Исходные зашифрованные данные:</label>
+                <textarea id="original-encrypted-data-output" rows="5" readonly></textarea>
+            </div>
+            <div id="decrypt-status" style="margin-top: 10px;"></div>
+            <div class="form-group">
+                <label>Расшифрованные данные:</label>
+                <textarea id="decrypted-bytes-output" rows="5" readonly></textarea>
+            </div>
+            <button id="save-decrypted-button" style="margin-top: 10px;" disabled>Сохранить в файл...</button>
+        </div>
+    </div>
+
+    <div id="status-message" class="status"></div>
+
+    <script src="./renderer.js"></script>
+</body>
+</html>
